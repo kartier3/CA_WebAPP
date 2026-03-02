@@ -21,3 +21,4 @@ handlebars.handlebars.registerHelper('eq', function (a, b) {
 app.use("/", routes);
 
 app.listen(port, () => logger.info(`Your app is listening on port ${port}`));
+

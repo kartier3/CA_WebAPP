@@ -1,38 +1,83 @@
 {{> menu}}
-<div class="ui container">
-  <h1 class="ui header">
-    <i class="info circle icon"></i>
+
+<style>
+ 
+</style>
+
+<div class="ui container about-container">
+  
+  <h1 class="ui header" style="margin-bottom: 30px;">
+    <i class="info circle icon" style="color: #e67e22;"></i>
     <div class="content">
-      About Express CA1 App
+      About Us
+      <div class="sub header">Meet the creator and learn more about our app</div>
     </div>
   </h1>
 
-  <div class="ui segment">
-    <p>
+  {{#each creators}}
+  <div class="creator-card">
+    <div class="ui grid">
+      <div class="four wide column center aligned">
+        <i class="circular huge user icon" style="background: rgba(255,255,255,0.2); padding: 20px;"></i>
+      </div>
+      <div class="twelve wide column">
+        <h2 style="color: white; margin-bottom: 5px;">{{this.name}}</h2>
+        <p style="color: rgba(255,255,255,0.9); font-size: 1.2rem; margin-bottom: 15px;">{{this.role}}</p>
+        <p style="color: rgba(255,255,255,0.8);"><i class="map marker icon"></i> {{this.location}}</p>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+
+  {{! Map }}
+  <div class="ui two column stackable grid" style="margin-bottom: 30px;">
+    <div class="eight wide column">
+      <h3 class="ui header">
+        <i class="map icon" style="color: #e67e22;"></i>
+        Our Location
+      </h3>
+      <img src="/waterfordmap.jpg" alt="Map of Dublin" class="map-image">
+      <p style="margin-top: 10px; color: #7f8c8d; text-align: center;">
+        <i class="map pin icon"></i> Based in Waterford, Ireland
+      </p>
+    </div>
+    
+    <div class="eight wide column">
+      <h3 class="ui header">
+        <i class="phone icon" style="color: #e67e22;"></i>
+        Contact Information
+      </h3>
+      <div class="contact-info">
+  <div class="contact-item">
+    <i class="envelope icon"></i>
+    <span>{{creators.[0].email}}</span>
+  </div>
+  <div class="contact-item">
+    <i class="phone icon"></i>
+    <span>{{creators.[0].phone}}</span>
+  </div>
+  <div class="contact-item">
+    <i class="map marker icon"></i>
+    <span>{{creators.[0].location}}</span>
+  </div>
+  <div class="contact-item">
+    <i class="github icon"></i>
+    <span>github.com/kartier3</span>
+  </div>
+</div>
+    </div>
+  </div>
+
+  
+<div>
+    <p>ㅤ</p>
+  </div>
+    <footer><div class="ui divider"></div>
+    <p style="color: #7f8c8d; font-style: italic;">
       This web application was developed as part of the Web App Design CA1 assignment.
-      It is built using Node.js, Express, and Handlebars following the MVC architecture pattern.
-    </p>
-
-    <h3 class="ui dividing header">Technologies Used</h3>
-    <div class="ui list">
-      <div class="item">✔ Node.js</div>
-      <div class="item">✔ Express.js</div>
-      <div class="item">✔ Handlebars (HBS)</div>
-      <div class="item">✔ Semantic UI</div>
-      <div class="item">✔ JSON-based data storage</div>
-    </div>
-
-    <h3 class="ui dividing header">Application Structure</h3>
-    <p>
-      The application follows the MVC flow:
-    </p>
-    <div class="ui message">
-      Browser → Route → Controller → View
-    </div>
-
-    <p>
-      Each page is rendered dynamically through Express routes and controllers,
-      ensuring proper separation between logic and presentation.
+      Built with Node.js, Express, Handlebars, and Semantic UI following MVC architecture.
     </p>
   </div>
+  
+</footer>
 </div>
