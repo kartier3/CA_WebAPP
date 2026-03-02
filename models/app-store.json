@@ -1,9 +1,57 @@
 {
   "info": {
-    "message": 
-      "The app-store.json and app-store.js files can be expanded to store some facts about the app e.g. the app's creators. You should also add your own store (equivalent to our playlist-store.json). See the assignment spec for more details.",
-    "creators": [
-      
-    ]
-  }
+    "message": "The app-store.json and app-store.js files can be expanded to store some facts about the app e.g. the app's creators. You should also add your own store (equivalent to our playlist-store.json). See the assignment spec for more details.",
+    "creators": []
+  },
+
+   "activities": [
+    {
+      "id": 1,
+      "name": "Climbing",
+      "description": "Just a climbing, be careful",
+      "difficulty": "Hard",
+      "image": "/climbing.jpg",
+      "details": "Rock climbing is an exhilarating full-body workout that builds strength and mental focus. Whether indoors or on natural rock faces, climbers challenge themselves to reach new heights. It's a sport that combines physical endurance with problem-solving as you figure out each route. The climbing community is supportive and welcoming to beginners."
+    },
+    {
+      "id": 2,
+      "name": "Surfing",
+      "description": "A water sport, lovely for beginners",
+      "difficulty": "Medium",
+      "image": "/surfing.jpg",
+      "details": "Surfing connects you with the ocean in a unique and thrilling way. Catching your first wave is an unforgettable experience that keeps surfers coming back for more. It's a fantastic full-body workout that improves balance, strength, and patience. The surf culture is laid-back and welcoming to newcomers willing to learn."
+    },
+    {
+      "id": 3,
+      "name": "Hiking",
+      "description": "Lots of preparation for wonderful views",
+      "difficulty": "Easy",
+      "image": "/Hiking.jpg",
+      "details": "Hiking lets you escape the noise of daily life and reconnect with nature. The sense of achievement when reaching a stunning viewpoint makes every step worth it. It's accessible to almost everyone and can be as gentle or challenging as you want. Plus, it's a great way to spend time with friends or enjoy some solitude."
+    },
+    {
+      "id": 4,
+      "name": "Cycling",
+      "description": "Riding a bicycle",
+      "difficulty": "Easy",
+      "image": "/Cycling.jpeg",
+      "details": "Cycling is freedom on two wheels, whether you're commuting or exploring new places. It's gentle on your joints while giving you an excellent cardiovascular workout. From leisurely rides through the park to challenging hill climbs, there's a style for everyone. The cycling community is friendly and always happy to welcome new riders."
+    },
+    {
+      "id": 5,
+      "name": "Kayaking",
+      "description": "Paddling a small boat",
+      "difficulty": "Medium",
+      "image": "/Kayaking.jpg",
+      "details": "Kayaking takes you to places you can't reach on foot, offering unique perspectives of nature. Gliding across calm water is incredibly peaceful and meditative. It's a fantastic upper body and core workout that doesn't feel like exercise. Whether on a lake, river, or ocean, every paddle stroke brings adventure."
+    },
+    {
+      "id": 6,
+      "name": "Skiing",
+      "description": "A sliding over snow using skis",
+      "difficulty": "Hard",
+      "image": "/Skiing.jpg",
+      "details": "Skiing turns snowy mountains into personal playgrounds of speed and freedom. The feeling of carving down a slope with fresh powder is absolutely exhilarating. It's a social sport that's even more fun with friends on the lifts and in the lodges. Plus, it makes winter something to look forward to instead of dread."
+    }
+  ]
 }

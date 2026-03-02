@@ -1,14 +1,22 @@
 'use strict';
 
 import express from 'express';
-import logger from "./utils/logger.js";
+
+import start from './controllers/start.js';
+import dashboard from './controllers/dashboard.js';
+import about from './controllers/about.js';
+import faq from './controllers/FAQ.js';
+import activity from './controllers/activity.js';  // Add this import
+
+
 
 const router = express.Router();
 
-// add your own routes below
-
-import start from './controllers/start.js';
 router.get('/', start.createView);
+router.get('/dashboard', dashboard.createView);
+router.get('/about', about.createView);
+router.get('/faq', faq.createView);
+router.get('/activity/:id', activity.createView);  
 
 
 export default router;

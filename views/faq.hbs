@@ -1,0 +1,51 @@
+{{> menu}}
+
+<div class="ui container">
+  <h1 class="ui header">
+    <i class="question circle icon"></i>
+    <div class="content">
+      Frequently Asked Questions
+    </div>
+  </h1>
+
+  <div class="ui styled fluid accordion">
+    
+    <div class="title">
+      <i class="dropdown icon"></i>
+      What is this application about?
+    </div>
+    <div class="content">
+      <p>
+        This is a Web App Design CA1 project built using Node.js and Express.
+        It demonstrates MVC architecture and dynamic rendering with Handlebars.
+      </p>
+    </div>
+
+    <div class="title">
+      <i class="dropdown icon"></i>
+      How is data stored?
+    </div>
+    <div class="content">
+      <p>
+        Data is stored in a JSON file called <strong>app-store.json</strong>,
+        which acts as a simple database.
+      </p>
+    </div>
+
+    <div class="title">
+      <i class="dropdown icon"></i>
+      What pattern does the app use?
+    </div>
+    <div class="content">
+      <p>
+        The application follows the Model-View-Controller (MVC) pattern,
+        separating routing, logic, and presentation.
+      </p>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  $('.ui.accordion').accordion();
+</script>

@@ -1,0 +1,68 @@
+{{> menu}}
+<div class="ui container">
+  
+  {{!-- Back to Dashboard button --}}
+  <div class="ui segment basic">
+    <a href="/dashboard" class="ui button">
+      <i class="arrow left icon"></i> Back to Dashboard
+    </a>
+  </div>
+  
+  {{!-- Activity Details Card --}}
+  <div class="ui segment">
+    <h1 class="ui header">
+      <i class="compass icon"></i>
+      <div class="content">
+        {{activity.name}}
+        <div class="sub header">Activity Details</div>
+      </div>
+    </h1>
+    
+    <div class="ui grid">
+      <div class="six wide column">
+        <div class="ui fluid image">
+          <img src="{{activity.image}}" alt="{{activity.name}}" style="height: 300px; object-fit: cover; border-radius: 5px;">
+        </div>
+      </div>
+      
+      <div class="ten wide column">
+        <div class="ui relaxed divided list">
+          <div class="item">
+            <i class="large info circle middle aligned icon"></i>
+            <div class="content">
+              <div class="header">Quick Description</div>
+              <div class="description">{{activity.description}}</div>
+            </div>
+          </div>
+          
+          <div class="item">
+            <i class="large signal middle aligned icon"></i>
+            <div class="content">
+              <div class="header">Difficulty Level</div>
+              <div class="description">
+                {{#if (eq activity.difficulty "Easy")}}
+                  <span class="ui green tag label">Easy</span>
+                {{else if (eq activity.difficulty "Medium")}}
+                  <span class="ui orange tag label">Medium</span>
+                {{else}}
+                  <span class="ui red tag label">Hard</span>
+                {{/if}}
+              </div>
+            </div>
+          </div>
+          
+          <div class="item">
+            <i class="large file text middle aligned icon"></i>
+            <div class="content">
+              <div class="header">More About {{activity.name}}</div>
+              <div class="description">
+                <p>{{activity.details}}</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+</div>

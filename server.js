@@ -14,6 +14,10 @@ const handlebars = create({extname: '.hbs'});
 app.engine(".hbs", handlebars.engine);
 app.set("view engine", ".hbs");
 
+handlebars.handlebars.registerHelper('eq', function (a, b) {
+  return a === b;
+});
+
 app.use("/", routes);
 
 app.listen(port, () => logger.info(`Your app is listening on port ${port}`));
