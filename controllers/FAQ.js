@@ -9,7 +9,7 @@ const faq = {
     logger.info("FAQ loading");
 
     const viewData = {
-      title: "FAQ",
+      title: appStore.getAppInfo(),
     };
 
     response.render("faq", viewData);

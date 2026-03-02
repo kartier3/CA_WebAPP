@@ -2,6 +2,7 @@
 
 import logger from "../utils/logger.js";
 import appData from "../models/app-store.json" with { type: 'json' };
+import appStore from "../models/app-store.js";
 
 const about = {
   createView(request, response) {
@@ -11,7 +12,7 @@ const about = {
       title: "About - CA1 Activity App",
       id: "about",
       creators: appData.info.creators,
-      stats: appData.appStats
+      stats: appStore.getAppInfo()
     };
 
     response.render("about", viewData);
