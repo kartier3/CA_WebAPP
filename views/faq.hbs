@@ -1,51 +1,73 @@
 {{> menu}}
-
-<div class="ui container">
-  <h1 class="ui header">
+<div class="ui container faq-container">
+  
+  <h1 class="ui header faq-header">
     <i class="question circle icon"></i>
     <div class="content">
       Frequently Asked Questions
     </div>
   </h1>
 
-  <div class="ui styled fluid accordion">
+  <div id="faq-container">
     
-    <div class="title">
-      <i class="dropdown icon"></i>
-      What is this application about?
-    </div>
-    <div class="content">
-      <p>
-        This is a Web App Design CA1 project built using Node.js and Express.
-        It demonstrates MVC architecture and dynamic rendering with Handlebars.
-      </p>
-    </div>
-
-    <div class="title">
-      <i class="dropdown icon"></i>
-      How is data stored?
-    </div>
-    <div class="content">
-      <p>
-        Data is stored in a JSON file called <strong>app-store.json</strong>,
-        which acts as a simple database.
-      </p>
+    {{!-- Question 1 --}}
+    <div class="faq-item">
+      <div class="faq-question">
+        What is this application about?
+      </div>
+      <div class="faq-answer">
+        <p>This is a Web App Design CA1 project built using Node.js and Express. It demonstrates MVC architecture and dynamic rendering with Handlebars.</p>
+      </div>
     </div>
 
-    <div class="title">
-      <i class="dropdown icon"></i>
-      What pattern does the app use?
+    {{!-- Question 2 --}}
+    <div class="faq-item">
+      <div class="faq-question">
+        How is data stored?
+      </div>
+      <div class="faq-answer">
+        <p>Data is stored in a JSON file called app-store.json, which acts as a simple database.</p>
+      </div>
     </div>
-    <div class="content">
-      <p>
-        The application follows the Model-View-Controller (MVC) pattern,
-        separating routing, logic, and presentation.
-      </p>
+
+    {{!-- Question 3 --}}
+    <div class="faq-item">
+      <div class="faq-question">
+        What pattern does the app use?
+      </div>
+      <div class="faq-answer">
+        <p>The application follows the Model-View-Controller (MVC) pattern, separating routing, logic, and presentation.</p>
+      </div>
+    </div>
+
+    {{!-- Question 4 --}}
+    <div class="faq-item">
+      <div class="faq-question">
+        How many activities are available?
+      </div>
+      <div class="faq-answer">
+        <p>Currently, there are 6 activities: Climbing, Surfing, Hiking, Cycling, Kayaking, and Skiing.</p>
+      </div>
     </div>
 
   </div>
+
 </div>
 
 <script>
-  $('.ui.accordion').accordion();
+  document.querySelectorAll('.faq-question').forEach(question => {
+    question.addEventListener('click', function() {
+      const answer = this.nextElementSibling;
+      
+      if (answer.style.maxHeight === '0px' || answer.style.maxHeight === '') {
+        answer.style.maxHeight = answer.scrollHeight + 'px';
+      } else {
+        answer.style.maxHeight = '0';
+      }
+    });
+  });
 </script>
+
+<style>
+      
+</style>
