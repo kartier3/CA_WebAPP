@@ -6,7 +6,7 @@ import start from './controllers/start.js';
 import dashboard from './controllers/dashboard.js';
 import about from './controllers/about.js';
 import faq from './controllers/FAQ.js';
-import activity from './controllers/activity.js';  // Add this import
+import activity from './controllers/activity.js';  
 
 
 

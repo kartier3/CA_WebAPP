@@ -1,7 +1,9 @@
 'use strict';
 
 import logger from "../utils/logger.js";
+import appData from "../models/app-store.json" with { type: 'json' };
 import appStore from "../models/app-store.js";
+
 
 const about = {
   createView(request, response) {
