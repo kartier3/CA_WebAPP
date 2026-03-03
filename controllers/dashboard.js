@@ -1,8 +1,7 @@
-
 'use strict';
 
 import logger from "../utils/logger.js";
-import appData from "../models/app-store.json" with { type: 'json' };
+import appStore from "../models/app-store.json" with { type: "json" };
 
 const dashboard = {
   createView(request, response) {
@@ -11,7 +10,7 @@ const dashboard = {
     const viewData = {
       title: "Activity Dashboard",
       id: "dashboard",
-      activities: appData.activities,
+      activities: appStore.activities,
     };
 
     response.render("dashboard", viewData);
