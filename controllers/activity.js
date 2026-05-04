@@ -16,7 +16,8 @@ const activity = {
     const viewData = {
       title: `${foundActivity.name} - Activity Details`,
       id: "activity",
-      activity: foundActivity
+      activity: foundActivity,
+      user: request.session.user
     };
 
     response.render("activity", viewData);
@@ -57,13 +58,17 @@ const activity = {
       logger.info(`Sorted by difficulty`);
     }
     
+    // Calculate individual user statistics
+    const userStats = userStore.getUserStats(userId);
+
     const viewData = {
       title: "My Activities",
       id: "my-activities",
       activities: activities,
       user: request.session.user,
       searchQuery: searchQuery,
-      sortBy: sortBy
+      sortBy: sortBy,
+      userStats: userStats
     };
     
     response.render("my-activities", viewData);

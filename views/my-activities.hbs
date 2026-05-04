@@ -50,6 +50,59 @@
     </form>
   </div>
 
+  <!-- Individual user statistics -->
+  <div class="ui segment">
+    <h3 class="ui header">
+      <i class="user circle icon"></i>
+      <div class="content">
+        My Statistics
+        <div class="sub header">Overview of your activity collection</div>
+      </div>
+    </h3>
+    <div class="ui four column stackable grid">
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value">
+            <i class="tasks icon"></i> {{userStats.totalActivities}}
+          </div>
+          <div class="label">
+            Total Activities
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value green">
+            <i class="smile icon"></i> {{userStats.easyCount}}
+          </div>
+          <div class="label">
+            Easy
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value orange">
+            <i class="meh icon"></i> {{userStats.mediumCount}}
+          </div>
+          <div class="label">
+            Medium
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value red">
+            <i class="frown icon"></i> {{userStats.hardCount}}
+          </div>
+          <div class="label">
+            Hard
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   {{#unless activities.length}}
     <div class="ui info message">
       <div class="header">No Activities Yet</div>

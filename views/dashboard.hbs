@@ -8,7 +8,6 @@
     </div>
   </h1>
 
-  <!-- NEW CODE: Search and Sort Controls for Global Activities -->
   <div class="ui segment">
     <form action="/dashboard" method="GET" class="ui form">
       <div class="ui two column stackable grid">
@@ -36,6 +35,61 @@
       </button>
       <a href="/dashboard" class="ui button">Clear Filters</a>
     </form>
+  </div>
+
+  <!--  statistics (average/min/max) -->
+  <div class="ui segment">
+    <h3 class="ui header">
+      <i class="chart line icon"></i>
+      <div class="content">
+        Community Statistics
+        <div class="sub header">Overview of all user collections</div>
+      </div>
+    </h3>
+    <div class="ui four column stackable grid">
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value">
+            <i class="users icon"></i> {{allStats.totalUsers}}
+          </div>
+          <div class="label">
+            Total Users
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value">
+            <i class="tasks icon"></i> {{allStats.totalActivities}}
+          </div>
+          <div class="label">
+            Total Activities
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value">
+            <i class="calculator icon"></i> {{allStats.averageActivities}}
+          </div>
+          <div class="label">
+            Avg Activities/User
+          </div>
+        </div>
+      </div>
+      <div class="column">
+        <div class="ui statistic">
+          <div class="value">
+            <i class="arrow down icon"></i> {{allStats.minActivities}}
+            <span style="font-size: 0.5em; margin: 0 5px;">/</span>
+            <i class="arrow up icon"></i> {{allStats.maxActivities}}
+          </div>
+          <div class="label">
+            Min / Max Activities
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 
   {{#if userActivities.length}}

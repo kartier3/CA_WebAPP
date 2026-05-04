@@ -8,11 +8,9 @@ const dashboard = {
   createView(request, response) {
     logger.info("dashboard is loading");
     
-    // NEW CODE: Get search and sort parameters from query string
     const searchQuery = request.query.search || '';
     const sortBy = request.query.sort || 'name';
     
-    // NEW CODE: Debug logging to check if parameters are received
     logger.info(`Search query: "${searchQuery}", Sort by: "${sortBy}"`);
     
     let userActivities = [];
@@ -21,7 +19,7 @@ const dashboard = {
       userActivities = user.activities || [];
     }
     
-    // NEW CODE: Filter global activities based on search query
+    // ilter global activities on ur text
     let filteredActivities = appStore.activities;
     if (searchQuery) {
       const searchLower = searchQuery.toLowerCase();
@@ -33,7 +31,7 @@ const dashboard = {
       logger.info(`Filtered activities from ${appStore.activities.length} to ${filteredActivities.length}`);
     }
     
-    // NEW CODE: Sort global activities based on sort parameter
+    //  Sort 
     if (sortBy === 'name') {
       filteredActivities.sort((a, b) => a.name.localeCompare(b.name));
       logger.info(`Sorted by name`);
@@ -43,6 +41,9 @@ const dashboard = {
       logger.info(`Sorted by difficulty`);
     }
     
+    // Calculate statistics for all collections
+    const allStats = userStore.getAllStats();
+
     const viewData = {
       title: "Activity Dashboard",
       id: "dashboard",
@@ -50,7 +51,8 @@ const dashboard = {
       userActivities: userActivities,
       user: request.session.user,
       searchQuery: searchQuery,
-      sortBy: sortBy
+      sortBy: sortBy,
+      allStats: allStats
     };
 
     response.render("dashboard", viewData);

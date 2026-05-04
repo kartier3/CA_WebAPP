@@ -151,6 +151,59 @@ const userStore = {
 
     data.stats.totalUsers = data.users.length;
     this.saveUsers(data);
+  },
+
+  // Calculate overall statistics for all users
+  getAllStats() {
+    const data = this.loadUsers();
+    const users = data.users;
+    
+    let totalActivities = 0;
+    let activityCounts = [];
+    
+    users.forEach(user => {
+      const count = user.activities ? user.activities.length : 0;
+      totalActivities += count;
+      activityCounts.push(count);
+    });
+    
+    const averageActivities = users.length > 0 ? (totalActivities / users.length).toFixed(1) : 0;
+    const minActivities = activityCounts.length > 0 ? Math.min(...activityCounts) : 0;
+    const maxActivities = activityCounts.length > 0 ? Math.max(...activityCounts) : 0;
+    
+    return {
+      totalUsers: users.length,
+      totalActivities: totalActivities,
+      averageActivities: averageActivities,
+      minActivities: minActivities,
+      maxActivities: maxActivities
+    };
+  },
+
+  // Calculate statistics for a specific user
+  getUserStats(userId) {
+    const user = this.findUserById(userId);
+    
+    if (!user || !user.activities) {
+      return {
+        totalActivities: 0,
+        easyCount: 0,
+        mediumCount: 0,
+        hardCount: 0
+      };
+    }
+    
+    const activities = user.activities;
+    const easyCount = activities.filter(a => a.difficulty === 'Easy').length;
+    const mediumCount = activities.filter(a => a.difficulty === 'Medium').length;
+    const hardCount = activities.filter(a => a.difficulty === 'Hard').length;
+    
+    return {
+      totalActivities: activities.length,
+      easyCount: easyCount,
+      mediumCount: mediumCount,
+      hardCount: hardCount
+    };
   }
 };
 
