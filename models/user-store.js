@@ -54,6 +54,19 @@ const userStore = {
     const data = this.loadUsers();
     return data.users.find(user => user.id === parseInt(id));
   },
+
+  updateUser(userId, updates) {
+    const data = this.loadUsers();
+    const userIndex = data.users.findIndex(u => u.id === parseInt(userId));
+    
+    if (userIndex !== -1) {
+      data.users[userIndex] = { ...data.users[userIndex], ...updates };
+      this.saveUsers(data);
+      return data.users[userIndex];
+    }
+    
+    return null;
+  },
   
   async validateUser(email, password) {
     const user = this.findUserByEmail(email);

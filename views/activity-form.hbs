@@ -18,7 +18,7 @@
     </div>
   {{/if}}
 
-  <form class="ui form segment" action="{{#if activity}}/activity/edit/{{activity.id}}{{else}}/activity/add{{/if}}" method="POST">
+  <form class="ui form segment" action="{{#if activity}}/activity/edit/{{activity.id}}{{else}}/activity/add{{/if}}" method="POST" enctype="multipart/form-data">
     <div class="field">
       <label>Activity Name *</label>
       <div class="ui left icon input">
@@ -46,12 +46,9 @@
     </div>
 
     <div class="field">
-      <label>Image URL</label>
-      <div class="ui left icon input">
-        <i class="image icon"></i>
-        <input type="text" name="image" placeholder="/default-activity.jpg" value="{{activity.image}}">
-      </div>
-      <small>Leave empty to use default image</small>
+      <label>Activity Image</label>
+      <input type="file" name="activityImage" accept="image/*">
+      <small>Upload an image or leave empty to use default</small>
     </div>
 
     <div class="field">

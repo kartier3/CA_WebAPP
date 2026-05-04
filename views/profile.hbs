@@ -1,0 +1,122 @@
+{{> menu}}
+<div class="ui container">
+  <h1 class="ui header">
+    <i class="user circle icon"></i>
+    <div class="content">
+      My Profile
+      <div class="sub header">Manage your profile information</div>
+    </div>
+  </h1>
+
+  {{#if error}}
+    <div class="ui error message">
+      <i class="close icon"></i>
+      <div class="header">Error</div>
+      <p>{{error}}</p>
+    </div>
+  {{/if}}
+
+  {{#if success}}
+    <div class="ui success message">
+      <i class="close icon"></i>
+      <div class="header">Success</div>
+      <p>{{success}}</p>
+    </div>
+  {{/if}}
+
+  <div class="ui segment">
+    <div class="ui two column stackable grid">
+      <div class="column">
+        <div class="ui card" style="width: 100%;">
+          <div class="image">
+            {{#if user.profileImage}}
+              <img src="{{user.profileImage}}" alt="Profile Picture" style="height: 300px; object-fit: cover;">
+            {{else}}
+              <img src="/default-profile.jpg" alt="Default Profile" style="height: 300px; object-fit: cover;">
+            {{/if}}
+          </div>
+          <div class="content">
+            <div class="header">{{user.firstName}} {{user.lastName}}</div>
+            <div class="meta">
+              <span>{{user.email}}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="column">
+        <div class="ui segment">
+          <h2 class="ui header">
+            <i class="upload icon"></i>
+            <div class="content">
+              Update Profile Picture
+              <div class="sub header">Upload a new profile image</div>
+            </div>
+          </h2>
+          
+          <form action="/profile/image" method="POST" enctype="multipart/form-data" class="ui form">
+            <div class="field">
+              <label>Choose Image</label>
+              <input type="file" name="profileImage" accept="image/*" required>
+            </div>
+            <div class="field">
+              <p class="ui small text">Accepted formats: JPEG, PNG, GIF, WebP. Maximum size: 5MB</p>
+            </div>
+            <button type="submit" class="ui primary button">
+              <i class="upload icon"></i> Upload Image
+            </button>
+          </form>
+        </div>
+
+        <div class="ui segment">
+          <h2 class="ui header">
+            <i class="info circle icon"></i>
+            <div class="content">
+              Account Information
+              <div class="sub header">Your account details</div>
+            </div>
+          </h2>
+          
+          <div class="ui list">
+            <div class="item">
+              <i class="user icon"></i>
+              <div class="content">
+                <div class="header">Name</div>
+                <div class="description">{{user.firstName}} {{user.lastName}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="mail icon"></i>
+              <div class="content">
+                <div class="header">Email</div>
+                <div class="description">{{user.email}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="calendar icon"></i>
+              <div class="content">
+                <div class="header">Member Since</div>
+                <div class="description">{{user.createdAt}}</div>
+              </div>
+            </div>
+            <div class="item">
+              <i class="tasks icon"></i>
+              <div class="content">
+                <div class="header">Total Activities</div>
+                <div class="description">{{user.activities.length}} activities</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelectorAll('.message .close.icon').forEach(icon => {
+    icon.addEventListener('click', function() {
+      this.closest('.message').style.display = 'none';
+    });
+  });
+</script>

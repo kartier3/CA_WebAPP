@@ -5,27 +5,27 @@
       "lastName": "Radzykhovskyi",
       "email": "radziholeg@gmail.com",
       "password": "12345678aA",
-      "profileImage": "/default-profile.jpg",
+      "profileImage": "/uploads/profile-1777902820729-222248580.jpg",
       "activities": [
         {
           "name": "aww",
           "description": "123",
           "difficulty": "Easy",
-          "image": "/default-activity.jpg",
+          "image": "/uploads/activity-1777902267137-123.jpg",
           "details": "TEST",
           "id": 1,
           "createdAt": "2026-05-04T09:23:07.166Z",
-          "updatedAt": "2026-05-04T10:33:19.850Z"
+          "updatedAt": "2026-05-04T13:44:27.139Z"
         },
         {
           "name": "1",
           "description": "1",
           "difficulty": "Hard",
-          "image": "/default-activity.jpg",
+          "image": "/uploads/activity-1777902281200-123.jpg",
           "details": "",
           "id": 2,
           "createdAt": "2026-05-04T09:26:07.949Z",
-          "updatedAt": "2026-05-04T10:58:02.766Z"
+          "updatedAt": "2026-05-04T13:44:41.202Z"
         },
         {
           "name": "Oleh",

@@ -3,7 +3,19 @@
 import logger from "../utils/logger.js";
 import appData from "../models/app-store.json" with { type: 'json' };
 import userStore from "../models/user-store.js";
+import path from "path";
+import fs from "fs";
+import { fileURLToPath } from "url";
+import sharp from "sharp";
 
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+const uploadDir = path.resolve(__dirname, '../public/uploads');
+
+// Ensure upload directory exists
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const activity = {
   createView(request, response) {
@@ -95,14 +107,29 @@ const activity = {
   },
 
   // create new activity for the user
-  createActivity(request, response) {
+  async createActivity(request, response) {
     logger.info("Processing new activity creation");
     
     const userId = request.session.user.id;
-    const { name, description, difficulty, image, details } = request.body;
+    const { name, description, difficulty, details } = request.body;
     
     if (!name || !description || !difficulty) {
       return response.redirect(`/activity/add?error=${encodeURIComponent('Name, description and difficulty are required')}`);
+    }
+    
+    // Image
+    let imagePath = "/default-activity.jpg";
+    if (request.file) {
+      const filename = request.file.originalname;
+      const filepath = path.join(uploadDir, 'activity-' + Date.now() + '-' + filename);
+      
+      const resizedImage = await sharp(request.file.buffer)
+        .resize({ height: 200, fit: 'cover' })
+        .toBuffer();
+      
+      fs.writeFileSync(filepath, resizedImage);
+      imagePath = '/uploads/' + path.basename(filepath);
+      logger.info(`Activity image saved and resized: ${imagePath}`);
     }
     
     // FUNCTION
@@ -110,7 +137,7 @@ const activity = {
       name,
       description,
       difficulty,
-      image: image || "/default-activity.jpg",
+      image: imagePath,
       details: details || ""
     };
     
@@ -149,10 +176,10 @@ const activity = {
     response.render("activity-form", viewData);
   },
 
-  updateActivity(request, response) {
+  async updateActivity(request, response) {
     const userId = request.session.user.id;
     const activityId = parseInt(request.params.id);
-    const { name, description, difficulty, image, details } = request.body;
+    const { name, description, difficulty, details } = request.body;
     
     logger.info(`Processing update for activity ID: ${activityId}`);
     
@@ -161,12 +188,32 @@ const activity = {
       return response.redirect(`/activity/edit/${activityId}?error=${encodeURIComponent('Name, description and difficulty are required')}`);
     }
     
+
+    const existingActivity = userStore.getUserActivity(userId, activityId);
+    
+
+    let imagePath = existingActivity ? existingActivity.image : "/default-activity.jpg";
+    
+    if (request.file) {
+      const filename = request.file.originalname;
+      const filepath = path.join(uploadDir, 'activity-' + Date.now() + '-' + filename);
+      
+      // Resize image to 200px height with cover fit
+      const resizedImage = await sharp(request.file.buffer)
+        .resize({ height: 200, fit: 'cover' })
+        .toBuffer();
+      
+      fs.writeFileSync(filepath, resizedImage);
+      imagePath = '/uploads/' + path.basename(filepath);
+      logger.info(`Activity image updated and resized: ${imagePath}`);
+    }
+    
     // FUNCTION -> create new activity with updated, barely works
     const updatedActivity = {
       name,
       description,
       difficulty,
-      image: image || "/default-activity.jpg",
+      image: imagePath,
       details: details || ""
     };
     

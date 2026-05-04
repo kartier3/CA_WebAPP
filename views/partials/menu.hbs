@@ -19,10 +19,10 @@
     
     <!-- NEW CODE: Show user info and logout when logged in -->
     {{#if session.user}}
-      <div class="item">
+      <a id="profile" href="/profile" class="item">
         <i class="user circle icon"></i>
         Welcome, {{session.user.firstName}}!
-      </div>
+      </a>
       <a id="logout" href="/logout" class="ui basic red button">Logout</a>
     {{/if}}
   </div>
