@@ -26,14 +26,44 @@ const activity = {
     const userId = request.session.user.id;
     logger.info(`Loading activities for user ID: ${userId}`);
     
+    // NEW CODE: Get search and sort parameters from query string
+    const searchQuery = request.query.search || '';
+    const sortBy = request.query.sort || 'name';
+    
+    // NEW CODE: Debug logging to check if parameters are received
+    logger.info(`Search query: "${searchQuery}", Sort by: "${sortBy}"`);
+    
     const user = userStore.findUserById(userId);
-    const activities = user.activities || [];
+    let activities = user.activities || [];
+    
+    // NEW CODE: Filter user activities based on search query
+    if (searchQuery) {
+      const searchLower = searchQuery.toLowerCase();
+      activities = activities.filter(activity => 
+        activity.name.toLowerCase().includes(searchLower) ||
+        activity.description.toLowerCase().includes(searchLower) ||
+        activity.difficulty.toLowerCase().includes(searchLower)
+      );
+      logger.info(`Filtered activities from ${user.activities.length} to ${activities.length}`);
+    }
+    
+    // NEW CODE: Sort user activities based on sort parameter
+    if (sortBy === 'name') {
+      activities.sort((a, b) => a.name.localeCompare(b.name));
+      logger.info(`Sorted by name`);
+    } else if (sortBy === 'difficulty') {
+      const difficultyOrder = { 'Easy': 1, 'Medium': 2, 'Hard': 3 };
+      activities.sort((a, b) => difficultyOrder[a.difficulty] - difficultyOrder[b.difficulty]);
+      logger.info(`Sorted by difficulty`);
+    }
     
     const viewData = {
       title: "My Activities",
       id: "my-activities",
       activities: activities,
-      user: request.session.user
+      user: request.session.user,
+      searchQuery: searchQuery,
+      sortBy: sortBy
     };
     
     response.render("my-activities", viewData);
@@ -54,19 +84,18 @@ const activity = {
     response.render("activity-form", viewData);
   },
 
-  // NEW CODE: Process form submission and create new activity for the user
+  // create new activity for the user
   createActivity(request, response) {
     logger.info("Processing new activity creation");
     
     const userId = request.session.user.id;
     const { name, description, difficulty, image, details } = request.body;
     
-    // NEW CODE: Validate required fields
     if (!name || !description || !difficulty) {
       return response.redirect(`/activity/add?error=${encodeURIComponent('Name, description and difficulty are required')}`);
     }
     
-    // NEW CODE: Create activity object with form data
+    // FUNCTION
     const newActivity = {
       name,
       description,
@@ -75,7 +104,6 @@ const activity = {
       details: details || ""
     };
     
-    // NEW CODE: Save activity to user's collection
     const savedActivity = userStore.addActivityToUser(userId, newActivity);
     
     if (savedActivity) {
@@ -87,14 +115,12 @@ const activity = {
     }
   },
 
-  // NEW CODE: Display form for editing an existing activity
   editActivityView(request, response) {
     const userId = request.session.user.id;
     const activityId = parseInt(request.params.id);
     
     logger.info(`Displaying edit form for activity ID: ${activityId}`);
     
-    // NEW CODE: Retrieve the specific activity belonging to this user
     const activity = userStore.getUserActivity(userId, activityId);
     
     if (!activity) {
@@ -113,7 +139,6 @@ const activity = {
     response.render("activity-form", viewData);
   },
 
-  // NEW CODE: Process form submission and update the activity
   updateActivity(request, response) {
     const userId = request.session.user.id;
     const activityId = parseInt(request.params.id);
@@ -121,12 +146,12 @@ const activity = {
     
     logger.info(`Processing update for activity ID: ${activityId}`);
     
-    // NEW CODE: Validate required fields
+    //  Validate required fields
     if (!name || !description || !difficulty) {
       return response.redirect(`/activity/edit/${activityId}?error=${encodeURIComponent('Name, description and difficulty are required')}`);
     }
     
-    // NEW CODE: Create updated activity object preserving the original ID
+    // FUNCTION -> create new activity with updated, barely works
     const updatedActivity = {
       name,
       description,
@@ -135,7 +160,7 @@ const activity = {
       details: details || ""
     };
     
-    // NEW CODE: Save updated activity to user's collection
+    // Save new activity to user's collection
     const savedActivity = userStore.updateActivity(userId, activityId, updatedActivity);
     
     if (savedActivity) {
@@ -147,14 +172,12 @@ const activity = {
     }
   },
 
-  // NEW CODE: Delete an activity from the user's collection
   deleteActivity(request, response) {
     const userId = request.session.user.id;
     const activityId = parseInt(request.params.id);
     
     logger.info(`Processing deletion for activity ID: ${activityId}`);
-    
-    // NEW CODE: Remove activity from user's collection
+    // 2 Functions, first to delete overall(Above) second to delete from library of user(Below)
     const deletedActivity = userStore.deleteActivity(userId, activityId);
     
     if (deletedActivity) {
@@ -166,14 +189,13 @@ const activity = {
     response.redirect('/my-activities');
   },
 
-  // NEW CODE: Add a global activity from app-store.json to the user's personal collection
+  // Add to user
   addGlobalActivity(request, response) {
     const userId = request.session.user.id;
     const globalActivityId = parseInt(request.params.id);
     
     logger.info(`Adding global activity ${globalActivityId} to user ${userId}`);
     
-    // NEW CODE: Find the global activity in app-store.json
     const globalActivity = appData.activities.find(a => a.id === globalActivityId);
     
     if (!globalActivity) {
@@ -181,7 +203,7 @@ const activity = {
       return response.redirect('/dashboard?error=Activity not found');
     }
     
-    // NEW CODE: Check if user already has this activity
+    // Check
     const user = userStore.findUserById(userId);
     const alreadyHasActivity = user.activities && user.activities.some(a => a.name === globalActivity.name);
     
@@ -190,7 +212,6 @@ const activity = {
       return response.redirect('/dashboard?error=You already have this activity in your collection');
     }
     
-    // NEW CODE: Create a copy of the global activity for the user
     const activityCopy = {
       name: globalActivity.name,
       description: globalActivity.description,
@@ -199,7 +220,6 @@ const activity = {
       details: globalActivity.details
     };
     
-    // NEW CODE: Add the activity to user's collection
     const savedActivity = userStore.addActivityToUser(userId, activityCopy);
     
     if (savedActivity) {

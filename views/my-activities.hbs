@@ -20,6 +20,36 @@
     </div>
   </div>
 
+  <!-- search and sort Controls for user  -->
+  <div class="ui segment">
+    <form action="/my-activities" method="GET" class="ui form">
+      <div class="ui two column stackable grid">
+        <div class="column">
+          <div class="field">
+            <label>Search My Activities</label>
+            <div class="ui icon input">
+              <input type="text" name="search" placeholder="Search by name, description, or difficulty..." value="{{searchQuery}}">
+              <i class="search icon"></i>
+            </div>
+          </div>
+        </div>
+        <div class="column">
+          <div class="field">
+            <label>Sort By</label>
+            <select name="sort" class="ui dropdown">
+              <option value="name" {{#if (eq sortBy 'name')}}selected{{/if}}>Name (A-Z)</option>
+              <option value="difficulty" {{#if (eq sortBy 'difficulty')}}selected{{/if}}>Difficulty (Easy to Hard)</option>
+            </select>
+          </div>
+        </div>
+      </div>
+      <button type="submit" class="ui primary button">
+        <i class="filter icon"></i> Apply Filters
+      </button>
+      <a href="/my-activities" class="ui button">Clear Filters</a>
+    </form>
+  </div>
+
   {{#unless activities.length}}
     <div class="ui info message">
       <div class="header">No Activities Yet</div>
