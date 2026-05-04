@@ -1,0 +1,20 @@
+{
+  "users": [
+    {
+      "firstName": "Oleh",
+      "lastName": "Radzykhovskyi",
+      "email": "radziholeg@gmail.com",
+      "password": "12345678aA",
+      "profileImage": "/default-profile.jpg",
+      "activities": [],
+      "createdAt": "2026-05-03T20:27:27.217Z",
+      "id": 1
+    }
+  ],
+  "stats": {
+    "totalUsers": 1,
+    "totalActivities": 0,
+    "userWithMostActivities": null,
+    "averageActivitiesPerUser": 0
+  }
+}

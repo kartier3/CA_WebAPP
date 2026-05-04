@@ -1,0 +1,93 @@
+{{> menu}}
+<div class="ui container">
+  <div class="ui middle aligned center aligned grid">
+    <div class="column">
+      <h2 class="ui blue image header">
+        <i class="user plus icon"></i>
+        <div class="content">
+          Create your Account
+          <div class="sub header">Join Activity Finder today</div>
+        </div>
+      </h2>
+
+    
+    <!-- Error message -->
+      {{#if error}}
+        <div class="ui error message">
+          <div class="header">Registration Error</div>
+          <p>{{error}}</p>
+        </div>
+      {{/if}}
+
+      <!-- Success message  -->
+      {{#if success}}
+        <div class="ui success message">
+          <div class="header">Success!</div>
+          <p>{{success}}</p>
+          <p><a href="/login" class="ui primary button">Login Now</a></p>
+        </div>
+      {{else}}
+        <form class="ui large form" action="/signup" method="POST">
+          <div class="ui stacked segment">
+            <div class="field">
+              <label>First Name</label>
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="firstName" placeholder="Enter your first name" required>
+              </div>
+            </div>
+            <div class="field">
+              <label>Last Name</label>
+              <div class="ui left icon input">
+                <i class="user icon"></i>
+                <input type="text" name="lastName" placeholder="Enter your last name" required>
+              </div>
+            </div>
+            <div class="field">
+              <label>Email Address</label>
+              <div class="ui left icon input">
+                <i class="envelope icon"></i>
+                <input type="email" name="email" placeholder="Enter your email" required>
+              </div>
+            </div>
+            <div class="field">
+              <label>Password</label>
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="password" placeholder="Enter your password" required>
+              </div>
+            </div>
+            <div class="field">
+              <label>Confirm Password</label>
+              <div class="ui left icon input">
+                <i class="lock icon"></i>
+                <input type="password" name="confirmPassword" placeholder="Confirm your password" required>
+              </div>
+            </div>
+            
+
+
+            <!-- Password -->
+            <div class="ui info message">
+              <div class="header">Password Requirements:</div>
+              <ul>
+                <li>At least 8 characters long</li>
+                <li>Contains at least one uppercase letter</li>
+                <li>Contains at least one lowercase letter</li>
+                <li>Contains at least one number</li>
+              </ul>
+            </div>
+            
+            <button type="submit" class="ui fluid large blue submit button">Sign Up</button>
+          </div>
+        </form>
+      {{/if}}
+    </div>
+  </div>
+</div>
+
+<style>
+  .column {
+    max-width: 450px;
+  }
+</style>

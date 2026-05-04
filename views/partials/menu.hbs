@@ -5,9 +5,21 @@
   </header>
 
   <div class="right menu">
+    <!-- NEW CODE: Always show signup/login in main menu for better UX -->
+    <a id="signup" href="/signup" class="ui basic green button">Sign Up</a>
+    <a id="login" href="/login" class="ui basic blue button">Login</a>
     <a id="dashboard" href="/dashboard">Dashboard</a>
     <a id="about" href="/about">About</a>
     <a id="faq" href="/faq">FAQ</a>
+    
+    <!-- NEW CODE: Show user info and logout when logged in -->
+    {{#if session.user}}
+      <div class="item">
+        <i class="user circle icon"></i>
+        Welcome, {{session.user.firstName}}!
+      </div>
+      <a id="logout" href="/logout" class="ui basic red button">Logout</a>
+    {{/if}}
   </div>
 
 </nav>
