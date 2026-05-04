@@ -8,6 +8,57 @@
     </div>
   </h1>
 
+  {{#if userActivities.length}}
+    <div class="ui segment">
+      <h2 class="ui header">
+        <i class="user icon"></i>
+        <div class="content">
+          My Activities
+          <div class="sub header">Your personal activity collection</div>
+        </div>
+      </h2>
+      <div class="ui three stackable cards">
+        {{#each userActivities}}
+          <div class="card">
+            <div class="image">
+              <img src="{{this.image}}" alt="{{this.name}}" style="height: 200px; object-fit: cover;">
+            </div>
+            <div class="content">
+              <div class="header">{{this.name}}</div>
+              <div class="meta">
+                <span>Difficulty: {{this.difficulty}}</span>
+              </div>
+              <div class="description">
+                <p>{{this.description}}</p>
+              </div>
+            </div>
+            <div class="extra content">
+              {{#if (eq this.difficulty "Easy")}}
+                <i class="green smile outline icon"></i> Easy
+              {{else if (eq this.difficulty "Medium")}}
+                <i class="orange meh outline icon"></i> Medium
+              {{else}}
+                <i class="red frown outline icon"></i> Hard
+              {{/if}}
+              
+              <a href="/my-activities" class="right floated" title="Manage in My Activities">
+                <i class="large edit link icon"></i>
+              </a>
+            </div>
+          </div>
+        {{/each}}
+      </div>
+    </div>
+  {{/if}}
+
+  <h2 class="ui header">
+    <i class="globe icon"></i>
+    <div class="content">
+      Global Activities
+      <div class="sub header">Explore activities available to everyone</div>
+    </div>
+  </h2>
+
   <div class="ui three stackable cards">
     {{#each activities}}
       <div class="card">
@@ -32,9 +83,19 @@
             <i class="red frown outline icon"></i> Hard
           {{/if}}
           
-          <a href="/activity/{{this.id}}" class="right floated">
+          <a href="/activity/{{this.id}}" class="right floated" title="View Details">
             <i class="large eye link icon"></i>
           </a>
+          
+
+
+          {{#if user}}
+            <form action="/activity/add-global/{{this.id}}" method="POST" style="display: inline;">
+              <button type="submit" class="ui basic green button" style="margin-left: 10px;" title="Add to My Activities">
+                <i class="plus icon"></i> Add
+              </button>
+            </form>
+          {{/if}}
         </div>
       </div>
     {{/each}}

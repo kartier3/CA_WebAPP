@@ -115,8 +115,14 @@ const auth = {
         profileImage: user.profileImage
       };
       
-      logger.info(`User logged in: ${user.email}`);
-      response.redirect('/dashboard');
+      // NEW CODE: Explicitly save session to ensure persistence
+      request.session.save((err) => {
+        if (err) {
+          logger.error("Error saving session:", err);
+        }
+        logger.info(`User logged in: ${user.email}`);
+        response.redirect('/dashboard');
+      });
     } else {
       logger.warn(`Login failed for email: ${email}`);
       response.redirect(`/login?error=${encodeURIComponent('Invalid email or password')}`);
@@ -137,6 +143,9 @@ const auth = {
   },
 
   ensureAuthenticated(request, response, next) {
+    // NEW CODE: Debug logging to track session state
+    logger.info(`ensureAuthenticated check - session exists: ${!!request.session}, session.user exists: ${!!request.session?.user}`);
+    
     if (request.session.user) {
       return next();
     }

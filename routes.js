@@ -14,7 +14,7 @@ import auth from './controllers/auth.js';
 
 const router = express.Router();
 
-// NEW CODE: Authentication routes
+// Authentication routes
 router.get('/signup', auth.signupView);
 router.post('/signup', auth.register);
 router.get('/login', auth.loginView);
@@ -29,7 +29,16 @@ router.get('/dashboard', dashboard.createView);
 router.get('/about', about.createView);
 router.get('/faq', faq.createView);
 
+//Activities
+router.get('/my-activities', auth.ensureAuthenticated, activity.listUserActivities);
+router.get('/activity/add', auth.ensureAuthenticated, activity.createActivityView);
+router.post('/activity/add', auth.ensureAuthenticated, activity.createActivity);
+router.get('/activity/edit/:id', auth.ensureAuthenticated, activity.editActivityView);
+router.post('/activity/edit/:id', auth.ensureAuthenticated, activity.updateActivity);
+router.post('/activity/delete/:id', auth.ensureAuthenticated, activity.deleteActivity);
+router.post('/activity/add-global/:id', auth.ensureAuthenticated, activity.addGlobalActivity);
 
-router.get('/activity/:id', activity.createView);  
+// Global
+router.get('/activity/:id', activity.createView);
 
 export default router;

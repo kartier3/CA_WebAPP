@@ -5,10 +5,15 @@
   </header>
 
   <div class="right menu">
-    <!-- NEW CODE: Always show signup/login in main menu for better UX -->
-    <a id="signup" href="/signup" class="ui basic green button">Sign Up</a>
-    <a id="login" href="/login" class="ui basic blue button">Login</a>
+    <!-- NEW CODE: Show signup/login only when NOT logged in -->
+    {{#unless session.user}}
+      <a id="signup" href="/signup" class="ui basic green button">Sign Up</a>
+      <a id="login" href="/login" class="ui basic blue button">Login</a>
+    {{/unless}}
+    
     <a id="dashboard" href="/dashboard">Dashboard</a>
+    <!-- NEW CODE: Link to My Activities page for logged-in users to manage their activities -->
+    <a id="my-activities" href="/my-activities">My Activities</a>
     <a id="about" href="/about">About</a>
     <a id="faq" href="/faq">FAQ</a>
     

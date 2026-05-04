@@ -16,6 +16,16 @@
       </div>
     </h1>
     
+    {{#if user}}
+      <div class="ui basic segment">
+        <form action="/activity/add-global/{{activity.id}}" method="POST">
+          <button type="submit" class="ui primary button">
+            <i class="plus icon"></i> Add to My Activities
+          </button>
+        </form>
+      </div>
+    {{/if}}
+    
     <div class="ui grid">
       <div class="six wide column">
         <div class="ui fluid image">

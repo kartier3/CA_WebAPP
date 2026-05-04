@@ -1,0 +1,70 @@
+{{> menu}}
+
+<div class="ui container">
+  <div class="ui basic segment">
+    <h1 class="ui header">
+      <i class="{{#if activity}}edit{{else}}plus{{/if}} icon"></i>
+      <div class="content">
+        {{#if activity}}Edit Activity{{else}}Add New Activity{{/if}}
+        <div class="sub header">{{#if activity}}Update your activity details{{else}}Create a new activity for your collection{{/if}}</div>
+      </div>
+    </h1>
+  </div>
+
+  {{#if error}}
+    <div class="ui error message">
+      <div class="header">Error</div>
+      <p>{{error}}</p>
+    </div>
+  {{/if}}
+
+  <form class="ui form segment" action="{{#if activity}}/activity/edit/{{activity.id}}{{else}}/activity/add{{/if}}" method="POST">
+    <div class="field">
+      <label>Activity Name *</label>
+      <div class="ui left icon input">
+        <i class="tag icon"></i>
+        <input type="text" name="name" placeholder="Enter activity name" value="{{activity.name}}" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Short Description *</label>
+      <div class="ui left icon input">
+        <i class="info circle icon"></i>
+        <input type="text" name="description" placeholder="Brief description of the activity" value="{{activity.description}}" required>
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Difficulty Level *</label>
+      <select name="difficulty" class="ui dropdown" required>
+        <option value="">Select difficulty</option>
+        <option value="Easy" {{#if (eq activity.difficulty "Easy")}}selected{{/if}}>Easy</option>
+        <option value="Medium" {{#if (eq activity.difficulty "Medium")}}selected{{/if}}>Medium</option>
+        <option value="Hard" {{#if (eq activity.difficulty "Hard")}}selected{{/if}}>Hard</option>
+      </select>
+    </div>
+
+    <div class="field">
+      <label>Image URL</label>
+      <div class="ui left icon input">
+        <i class="image icon"></i>
+        <input type="text" name="image" placeholder="/default-activity.jpg" value="{{activity.image}}">
+      </div>
+      <small>Leave empty to use default image</small>
+    </div>
+
+    <div class="field">
+      <label>Full Details</label>
+      <textarea name="details" rows="4" placeholder="Enter detailed description of the activity...">{{activity.details}}</textarea>
+    </div>
+
+    <div class="ui buttons">
+      <a href="/my-activities" class="ui button">Cancel</a>
+      <div class="or"></div>
+      <button type="submit" class="ui primary button">
+        {{#if activity}}Update Activity{{else}}Create Activity{{/if}}
+      </button>
+    </div>
+  </form>
+</div>

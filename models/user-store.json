@@ -6,7 +6,56 @@
       "email": "radziholeg@gmail.com",
       "password": "12345678aA",
       "profileImage": "/default-profile.jpg",
-      "activities": [],
+      "activities": [
+        {
+          "name": "aww",
+          "description": "123",
+          "difficulty": "Easy",
+          "image": "/default-activity.jpg",
+          "details": "TEST",
+          "id": 1,
+          "createdAt": "2026-05-04T09:23:07.166Z",
+          "updatedAt": "2026-05-04T09:25:16.193Z"
+        },
+        {
+          "name": "1",
+          "description": "1",
+          "difficulty": "Hard",
+          "image": "/default-activity.jpg",
+          "details": "",
+          "id": 2,
+          "createdAt": "2026-05-04T09:26:07.949Z",
+          "updatedAt": "2026-05-04T09:45:09.163Z"
+        },
+        {
+          "name": "Oleh",
+          "description": "1",
+          "difficulty": "Medium",
+          "image": "/default-activity.jpg",
+          "details": "1",
+          "id": 3,
+          "createdAt": "2026-05-04T09:31:03.734Z"
+        },
+        {
+          "name": "Climbing",
+          "description": "Just a climbing, be careful",
+          "difficulty": "Hard",
+          "image": "/climbing.jpg",
+          "details": "Rock climbing is an exhilarating full-body workout that builds strength and mental focus. Whether indoors or on natural rock faces, climbers challenge themselves to reach new heights. It's a sport that combines physical endurance with problem-solving as you figure out each route. The climbing community is supportive and welcoming to beginners.",
+          "id": 4,
+          "createdAt": "2026-05-04T09:35:57.629Z"
+        },
+        {
+          "name": "Surfing",
+          "description": "A water sport, lovely for beginners",
+          "difficulty": "Medium",
+          "image": "/surfing.jpg",
+          "details": "Surfing connects you with the ocean in a unique and thrilling way. Catching your first wave is an unforgettable experience that keeps surfers coming back for more. It's a fantastic full-body workout that improves balance, strength, and patience. The surf culture is laid-back and welcoming to newcomers willing to learn.",
+          "id": 5,
+          "createdAt": "2026-05-04T09:44:58.224Z",
+          "updatedAt": "2026-05-04T09:45:23.219Z"
+        }
+      ],
       "createdAt": "2026-05-03T20:27:27.217Z",
       "id": 1
     }
