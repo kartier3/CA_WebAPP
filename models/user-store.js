@@ -55,6 +55,11 @@ const userStore = {
     return data.users.find(user => user.id === parseInt(id));
   },
 
+  getAllUsers() {
+    const data = this.loadUsers();
+    return data.users;
+  },
+
   updateUser(userId, updates) {
     const data = this.loadUsers();
     const userIndex = data.users.findIndex(u => u.id === parseInt(userId));

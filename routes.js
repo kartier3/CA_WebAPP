@@ -9,7 +9,8 @@ import faq from './controllers/FAQ.js';
 import activity from './controllers/activity.js';
 // ADD: Import authentication controller
 import auth from './controllers/auth.js';
-import profile, { upload } from './controllers/profile.js';  
+import profile, { upload } from './controllers/profile.js';
+import users from './controllers/users.js';  
 
 
 
@@ -42,6 +43,9 @@ router.post('/activity/add-global/:id', auth.ensureAuthenticated, activity.addGl
 // Profile
 router.get('/profile', auth.ensureAuthenticated, profile.createView);
 router.post('/profile/image', auth.ensureAuthenticated, upload.single('profileImage'), profile.updateProfileImage);
+
+// Users
+router.get('/users', auth.ensureAuthenticated, users.createView);
 
 // Global
 router.get('/activity/:id', activity.createView);

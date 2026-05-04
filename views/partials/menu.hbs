@@ -5,23 +5,24 @@
   </header>
 
   <div class="right menu">
-    <!-- NEW CODE: Show signup/login only when NOT logged in -->
     {{#unless session.user}}
       <a id="signup" href="/signup" class="ui basic green button">Sign Up</a>
       <a id="login" href="/login" class="ui basic blue button">Login</a>
     {{/unless}}
     
     <a id="dashboard" href="/dashboard">Dashboard</a>
-    <!-- NEW CODE: Link to My Activities page for logged-in users to manage their activities -->
     <a id="my-activities" href="/my-activities">My Activities</a>
     <a id="about" href="/about">About</a>
     <a id="faq" href="/faq">FAQ</a>
     
-    <!-- NEW CODE: Show user info and logout when logged in -->
     {{#if session.user}}
       <a id="profile" href="/profile" class="item">
         <i class="user circle icon"></i>
         Welcome, {{session.user.firstName}}!
+      </a>
+      <a id="users" href="/users" class="item">
+        <i class="users icon"></i>
+        All Users
       </a>
       <a id="logout" href="/logout" class="ui basic red button">Logout</a>
     {{/if}}

@@ -1,0 +1,74 @@
+{{> menu}}
+
+<div class="ui container">
+  <h1 class="ui header">
+    <i class="users icon"></i>
+    <div class="content">
+      All Users
+      <div class="sub header">View user statistics and activity</div>
+    </div>
+  </h1>
+
+  <div class="ui segment">
+    <div class="ui form">
+      <div class="field">
+        <label>Sort by:</label>
+        <select class="ui dropdown" onchange="window.location.href='/users?sort=' + this.value + '&direction={{direction}}'">
+          <option value="name" {{#if (eq sortBy "name")}}selected{{/if}}>Name</option>
+          <option value="email" {{#if (eq sortBy "email")}}selected{{/if}}>Email</option>
+          <option value="activityCount" {{#if (eq sortBy "activityCount")}}selected{{/if}}>Activity Count</option>
+          <option value="date" {{#if (eq sortBy "date")}}selected{{/if}}>Date Joined</option>
+        </select>
+      </div>
+      <div class="field">
+        <label>Direction:</label>
+        <select class="ui dropdown" onchange="window.location.href='/users?sort={{sortBy}}&direction=' + this.value">
+          <option value="asc" {{#if (eq direction "asc")}}selected{{/if}}>Ascending</option>
+          <option value="desc" {{#if (eq direction "desc")}}selected{{/if}}>Descending</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="ui cards">
+    {{#each users}}
+      <div class="ui card">
+        <div class="content">
+          <div class="header">
+            {{this.firstName}} {{this.lastName}}
+            {{#if this.profileImage}}
+              <img class="ui avatar image" src="{{this.profileImage}}" alt="{{this.firstName}}">
+            {{else}}
+              <i class="user circle icon"></i>
+            {{/if}}
+          </div>
+          <div class="meta">
+            <span>{{this.email}}</span>
+          </div>
+          <div class="description">
+            <div class="ui list">
+              <div class="item">
+                <i class="list icon"></i>
+                <div class="content">
+                  <strong>Activities:</strong> {{this.activityCount}}
+                </div>
+              </div>
+              <div class="item">
+                <i class="calendar icon"></i>
+                <div class="content">
+                  <strong>Member Since:</strong> {{this.createdAt}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    {{/each}}
+  </div>
+</div>
+
+<script>
+  $(document).ready(function() {
+    $('.ui.dropdown').dropdown();
+  });
+</script>
