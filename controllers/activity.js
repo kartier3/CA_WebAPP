@@ -12,12 +12,17 @@ const activity = {
     
   
     const foundActivity = appData.activities.find(activity => activity.id === activityId);
+    
+    // Calculate how many users have this activity
+    const activityPopularity = userStore.getGlobalActivityPopularity();
+    const userCount = activityPopularity[foundActivity.name] || 0;
 
     const viewData = {
       title: `${foundActivity.name} - Activity Details`,
       id: "activity",
       activity: foundActivity,
-      user: request.session.user
+      user: request.session.user,
+      userCount: userCount
     };
 
     response.render("activity", viewData);
@@ -165,7 +170,7 @@ const activity = {
       details: details || ""
     };
     
-    // Save new activity to user's collection
+    //  activity  user's
     const savedActivity = userStore.updateActivity(userId, activityId, updatedActivity);
     
     if (savedActivity) {

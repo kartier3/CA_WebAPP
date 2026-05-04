@@ -19,7 +19,7 @@ const dashboard = {
       userActivities = user.activities || [];
     }
     
-    // ilter global activities on ur text
+    //  global activities on ur text
     let filteredActivities = appStore.activities;
     if (searchQuery) {
       const searchLower = searchQuery.toLowerCase();

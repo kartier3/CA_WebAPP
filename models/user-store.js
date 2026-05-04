@@ -204,6 +204,28 @@ const userStore = {
       mediumCount: mediumCount,
       hardCount: hardCount
     };
+  },
+
+  // Calculate how many users have added each global activity
+  getGlobalActivityPopularity() {
+    const data = this.loadUsers();
+    const users = data.users;
+    const activityPopularity = {};
+
+    users.forEach(user => {
+      if (user.activities) {
+        user.activities.forEach(activity => {
+          const activityName = activity.name;
+          if (activityPopularity[activityName]) {
+            activityPopularity[activityName]++;
+          } else {
+            activityPopularity[activityName] = 1;
+          }
+        });
+      }
+    });
+
+    return activityPopularity;
   }
 };
 
