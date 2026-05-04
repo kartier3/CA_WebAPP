@@ -71,34 +71,6 @@ The application will run on http://localhost:3000
 
 ## Project Structure
 
-```
-CA_WebAPP/
-├── controllers/          # Application logic controllers
-│   ├── auth.js          # Authentication controller
-│   ├── activity.js      # Activity management controller
-│   ├── dashboard.js     # Dashboard controller
-│   ├── profile.js       # Profile management controller
-│   ├── users.js         # Users list controller
-│   └── start.js         # Landing page controller
-├── models/              # Data models and storage
-│   ├── user-store.js    # User data management
-│   └── app-store.json   # Global activities data
-├── utils/               # Utility functions
-│   ├── logger.js        # Winston logger configuration
-│   └── image-utils.js   # Image processing utilities
-├── views/               # Handlebars templates
-│   ├── partials/        # Reusable template components
-│   │   └── menu.hbs     # Navigation menu
-│   ├── activity-form.hbs # Activity creation/edit form
-│   ├── dashboard.hbs    # Dashboard page
-│   ├── profile.hbs      # User profile page
-│   └── users.hbs        # Users list page
-├── public/              # Static files
-│   └── uploads/         # Uploaded images directory
-├── routes.js            # Application routes
-├── server.js            # Server configuration
-└── package.json         # Dependencies and scripts
-```
 
 ## API Routes
 

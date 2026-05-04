@@ -12,24 +12,21 @@ const port = 3000;
 
 app.use(express.static("public"));
 
-// NEW CODE: URL parsing middleware for form data
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
-// NEW CODE: Configure express-session with memory store for session persistence
 app.use(session({
   secret: 'your-secret-key-change-in-production',
   resave: true,
   saveUninitialized: true,
   cookie: { 
-    secure: false, // Set to true if using HTTPS
-    maxAge: 24 * 60 * 60 * 1000, // Session expires after 24 hours
-    httpOnly: true // Prevent client-side JavaScript from accessing the cookie
+    secure: false, 
+    maxAge: 24 * 60 * 60 * 1000, 
+    httpOnly: true 
   },
-  name: 'activity-finder.sid' // Custom cookie name to avoid conflicts
+  name: 'activity-finder.sid' 
 }));
 
-// NEW CODE: Middleware to make session available to views via res.locals
 app.use((req, res, next) => {
   res.locals.session = req.session;
   next();
