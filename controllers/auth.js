@@ -115,7 +115,6 @@ const auth = {
         profileImage: user.profileImage
       };
       
-      // NEW CODE: Explicitly save session to ensure persistence
       request.session.save((err) => {
         if (err) {
           logger.error("Error saving session:", err);
@@ -143,7 +142,6 @@ const auth = {
   },
 
   ensureAuthenticated(request, response, next) {
-    // NEW CODE: Debug logging to track session state
     logger.info(`ensureAuthenticated check - session exists: ${!!request.session}, session.user exists: ${!!request.session?.user}`);
     
     if (request.session.user) {

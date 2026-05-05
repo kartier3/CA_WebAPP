@@ -4,7 +4,7 @@ import express from 'express';
 import routes from "./routes.js";
 import logger from "./utils/logger.js";
 import { create } from 'express-handlebars';
-// NEW CODE: Import express-session for proper cookie-based session management
+
 import session from 'express-session';
 
 const app = express();
@@ -16,7 +16,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 
 app.use(session({
-  secret: 'your-secret-key-change-in-production',
+  secret: 'key12345',
   resave: true,
   saveUninitialized: true,
   cookie: { 
