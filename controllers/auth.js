@@ -20,8 +20,14 @@ const auth = {
   async register(request, response) {
     logger.info("Processing user registration");
     
-    const { firstName, lastName, email, password, confirmPassword } = request.body;
-    
+    const { 
+      firstName,
+       lastName,
+        email,
+         password,
+          confirmPassword 
+        } = request.body;
+    // password: hashedPassword
     const errors = [];
     
     if (!firstName || !lastName || !email || !password || !confirmPassword) {
@@ -71,6 +77,7 @@ const auth = {
       activities: [], // User's personal activities collection
       createdAt: new Date().toISOString()
     };
+    //Was supposed to be password: hashedPassword but did not understand
     
     try {
       const user = userStore.addUser(newUser);
@@ -98,7 +105,9 @@ const auth = {
   login(request, response) {
     logger.info("Processing user login");
     
-    const { email, password } = request.body;
+    const { 
+      email,
+       password } = request.body;
     
     if (!email || !password) {
       return response.redirect(`/login?error=${encodeURIComponent('Email and password are required')}`);

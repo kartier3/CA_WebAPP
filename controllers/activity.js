@@ -44,17 +44,14 @@ const activity = {
     const userId = request.session.user.id;
     logger.info(`Loading activities for user ID: ${userId}`);
     
-    // NEW CODE: Get search and sort parameters from query string
     const searchQuery = request.query.search || '';
     const sortBy = request.query.sort || 'name';
     
-    // NEW CODE: Debug logging to check if parameters are received
     logger.info(`Search query: "${searchQuery}", Sort by: "${sortBy}"`);
     
     const user = userStore.findUserById(userId);
     let activities = user.activities || [];
     
-    // NEW CODE: Filter user activities based on search query
     if (searchQuery) {
       const searchLower = searchQuery.toLowerCase();
       activities = activities.filter(activity => 
@@ -65,7 +62,6 @@ const activity = {
       logger.info(`Filtered activities from ${user.activities.length} to ${activities.length}`);
     }
     
-    // NEW CODE: Sort user activities based on sort parameter
     if (sortBy === 'name') {
       activities.sort((a, b) => a.name.localeCompare(b.name));
       logger.info(`Sorted by name`);
@@ -91,7 +87,6 @@ const activity = {
     response.render("my-activities", viewData);
   },
 
-  // NEW CODE: Display form for adding a new activity
   createActivityView(request, response) {
     logger.info("Displaying add activity form");
     
